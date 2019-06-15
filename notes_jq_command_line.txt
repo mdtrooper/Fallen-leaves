@@ -1,0 +1,6 @@
+$ cat test.json | jq '.posts | length'
+50
+
+$ cat test.json | jq '.posts[0]'
+
+$ cat test.json | jq '.posts[0]["photo-url-1280"]'

@@ -1,0 +1,16 @@
+{
+  "name": "desktop_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "",
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL",
+  "devDependencies": {
+    "electron": "^4.0.1"
+  }
+}
