@@ -1,7 +1,6 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 
 function createWindow () {
-    // Crea la ventana del navegador.
     let win = new BrowserWindow({
         width: 800,
         height: 600,
@@ -9,8 +8,31 @@ function createWindow () {
             nodeIntegration: true
         }
     })
-
-    // and load the index.html of the app.
+    
+    var menu = Menu.buildFromTemplate([
+        {
+            label: 'File',
+            submenu: [
+                {label: 'Adjust Notification Value'},
+                {label: 'CoinMarketCap'},
+                {label: 'Exit'}
+            ]
+        },
+        {
+            label: 'Edit',
+            submenu: [
+                {label: 'Preferences'}
+            ]
+        },
+        {
+            label: 'Help',
+            submenu: [
+                {label: 'About'}
+            ]
+        }
+    ])
+    Menu.setApplicationMenu(menu); 
+    
     win.loadFile('index.html');
 }
 
