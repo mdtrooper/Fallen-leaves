@@ -62,7 +62,7 @@ function aboutWindow() {
             <head></head>
             <body>
                 <p>
-                    <b>Slideshow</b><br/>
+                    <b>Fallen leaves</b><br/>
                     <b>GPL 2019</b><br/>
                     Original Proyect: <a target="_blank" href="javascript: openBrowser('https://github.com/scottgarner/Thumblr');">Scott Garner</a>
                 </p>

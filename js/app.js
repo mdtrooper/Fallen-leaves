@@ -36,7 +36,7 @@ var thumblr = {
     },
     
     reloadTitle: function() {
-        $("title").text(`Slideshow: ${this.imageIndex}/${list_images.length} '${this.path}'`);
+        $("title").text(`Fallen leaves: ${this.imageIndex}/${list_images.length} '${this.path}'`);
     },
     
     fetchData: function() {
