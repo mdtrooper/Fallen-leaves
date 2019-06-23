@@ -25,7 +25,7 @@ function createWindow () {
         {
             label: 'Edit',
             submenu: [
-                {label: 'Preferences', enabled: false, click() {app.exit(0)}, accelerator: 'CmdOrCtrl+Alt+P'}
+                {label: 'Preferences', click() {preferencesWindow();}, accelerator: 'CmdOrCtrl+Alt+P'}
             ]
         },
         {
@@ -45,6 +45,21 @@ function dialogDirectory() {
     dialog.showOpenDialog(win, {
         properties: ['openDirectory']},
         (filePaths) => { win.webContents.send('open_directory', filePaths); });
+}
+
+function preferencesWindow() {
+    child = new BrowserWindow({
+        width: 600,
+        height: 300,
+        parent: win,
+        modal: true,
+        show: false,
+        title: "Preferences"});
+    child.setMenuBarVisibility(false);
+    
+    child.webContents.openDevTools();
+    child.loadFile('preferences.html');
+    child.show();
 }
 
 function aboutWindow() {

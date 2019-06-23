@@ -10,10 +10,12 @@
   "keywords": [],
   "author": "",
   "license": "GPL",
-  "Dependencies": {
-    "mime-types": "^2.1.24"
-  },
   "devDependencies": {
     "electron": "^4.0.1"
+  },
+  "dependencies": {
+    "electron-context-menu": "^0.12.1",
+    "electron-store": "^3.3.0",
+    "mime-types": "^2.1.24"
   }
 }

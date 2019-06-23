@@ -4,6 +4,8 @@ var list_images = [];
 const { ipcRenderer } = require('electron');
 const fs = require('fs');
 const mime = require('mime-types');
+const Store = require('electron-store');
+const store = new Store();
 
 ipcRenderer.on('open_directory', (event, arg) => {
     list_images = [];
