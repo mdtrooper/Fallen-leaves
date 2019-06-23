@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Fallen leaves</title>
+        
+        <meta name="description" content="Image Slideshow" />
+        <meta name="author" content="Original Scott Garner, Electron version by Miguel de Dios" />
+        
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+        
+        <script type="text/javascript" src="js/preferences.js"></script>
+    </head>
+    <body>
+        <h4>Preferences</h4>
+        <form>
+            <div>Seconds next photo: <input type="number" name="quantity" min="0" maxlength="4" size="4"></div>
+            <div>Max number photos in stage: <input disabled="true" type="number" name="quantity" min="0" maxlength="4" size="4"></div>
+            <div>
+                Sort images:
+                <div sytle=" display: flex; flex-direction: row;">
+                    <div>
+                        <input id="alphabetic" type="radio" name="sort" value="alphabetic" />
+                        <label for="alphabetic">Alphabetic</label>
+                    </div>
+                    <div><input id="date" type="radio" name="sort" value="date" /><label for="date">Date</label></div>
+                    <div><input id="size" type="radio" name="sort" value="size" /><label for="size">Size</label></div>
+                </div>
+            </div>
+            <div>
+                Others:
+                <div><input type="checkbox" name="random" /><label for="random">Random</label></div>
+                <div><input type="checkbox" name="reverse" /><label for="reverse">Reverse</label></div>
+            </div>
+        </form>
+    </body>
+</html>
