@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "build": "",
-    "start": "electron ."
+    "start": "electron .",
+    "cp_bootstrap": "cp node_modules/bootstrap/dist/css/* ./css/ && cp node_modules/bootstrap/dist/js/* ./js/"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
     "electron": "^4.0.1"
   },
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "electron-context-menu": "^0.12.1",
     "electron-store": "^3.3.0",
     "mime-types": "^2.1.24"
