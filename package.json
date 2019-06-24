@@ -6,7 +6,7 @@
   "scripts": {
     "build": "",
     "start": "electron .",
-    "cp_bootstrap": "cp node_modules/bootstrap/dist/css/* ./css/ && cp node_modules/bootstrap/dist/js/* ./js/"
+    "cp_js_libraries": "cp node_modules/bootstrap/dist/css/* ./css/ && cp node_modules/bootstrap/dist/js/* ./js/ && cp node_modules/jquery/dist/jquery.min.js ./js/ && cp node_modules/jquery-ui-dist/*.js ./js/ && cp node_modules/jquery-ui-dist/*.css ./css/ && cp node_modules/jquery-ui-dist/images ./css/ -r"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +18,8 @@
     "bootstrap": "^4.3.1",
     "electron-context-menu": "^0.12.1",
     "electron-store": "^3.3.0",
+    "jquery": "^3.4.1",
+    "jquery-ui-dist": "^1.12.1",
     "mime-types": "^2.1.24"
   }
 }
