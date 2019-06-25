@@ -57,7 +57,7 @@ function preferencesWindow() {
         title: "Preferences"});
     child.setMenuBarVisibility(false);
     
-    child.webContents.openDevTools();
+    //~ child.webContents.openDevTools();
     child.loadFile('preferences.html');
     child.show();
 }
