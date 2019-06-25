@@ -8,6 +8,18 @@ const store = new Store();
 var list_sizes = [];
 var list_images = [];
 
+function shuffle(array) {      
+    var l = array.length, temp, index;  
+    while (l > 0) {  
+       index = Math.floor(Math.random() * l);  
+       l--;  
+       temp = array[l];          
+       array[l] = array[index];          
+       array[index] = temp;      
+    }    
+    return array;    
+}
+
 ipcRenderer.on('open_directory', (event, arg) => {
     list_images = [];
     list_images = [];
@@ -19,6 +31,32 @@ ipcRenderer.on('open_directory', (event, arg) => {
             if (mimetype === false) continue;
             if (mimetype.split('/')[0] == 'image') {
                 list_images.push(filepath);
+            }
+        }
+        
+        if (store.get('random', RANDOM)) {
+            list_images = shuffle(list_images);
+        }
+        else {
+            // Sort
+            list_images.sort(function(a, b) {
+                switch (store.get('sort', SORT)) {
+                    case 'alphabetic':
+                        let name_a = a.split('/').pop().split('.')[0]
+                        let name_b = b.split('/').pop().split('.')[0]
+                        return name_a.localeCompare(name_b);
+                        break;
+                    case 'date':
+                        return fs.statSync(a).mtime.getTime() - 
+                            fs.statSync(b).mtime.getTime();
+                        break;
+                    case 'size':
+                        return fs.statSync(a).size - fs.statSync(b).size;
+                        break;
+                }
+            });
+            if (store.get('reverse', REVERSE)) {
+                list_images = list_images.reverse();
             }
         }
         
