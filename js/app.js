@@ -1,11 +1,12 @@
-var list_sizes = [];
-var list_images = [];
-
 const { ipcRenderer } = require('electron');
 const fs = require('fs');
 const mime = require('mime-types');
 const Store = require('electron-store');
+
 const store = new Store();
+
+var list_sizes = [];
+var list_images = [];
 
 ipcRenderer.on('open_directory', (event, arg) => {
     list_images = [];
@@ -21,13 +22,13 @@ ipcRenderer.on('open_directory', (event, arg) => {
             }
         }
         
-        thumblr.path = path;
+        fallen_leaves.path = path;
         
-        thumblr.fetchData();
+        fallen_leaves.fetchData();
     });
 });
 
-var thumblr = {
+var fallen_leaves = {
     imageIndex: 0,
     maxZIndex: 1,
     tumblrData: null,
@@ -45,41 +46,41 @@ var thumblr = {
         $('#stage').fadeOut('slow', function() {
             $('.photo').remove();
             $('#stage').show();
-            thumblr.addImage();
+            fallen_leaves.addImage();
         });
         
-        thumblr.maxZIndex = 0;
-        thumblr.imageIndex = 0;
+        fallen_leaves.maxZIndex = 0;
+        fallen_leaves.imageIndex = 0;
         
-        thumblr.preloadImage();
+        fallen_leaves.preloadImage();
         
-        clearTimeout (thumblr.interval);
-        thumblr.interval = setInterval ( "thumblr.addImage()", 4000 );
+        clearTimeout (fallen_leaves.interval);
+        fallen_leaves.interval = setInterval ( "fallen_leaves.addImage()", 4000 );
     },
     
     preloadImage: function() {
-        if (thumblr.imageIndex >= list_images.length) {
+        if (fallen_leaves.imageIndex >= list_images.length) {
             return -1;
         }
         
-        var curImage = list_images[thumblr.imageIndex];
+        var curImage = list_images[fallen_leaves.imageIndex];
         var tempImage = new Image();
-        tempImage.onload = function () { list_sizes[thumblr.imageIndex] = [this.width, this.height]; }
+        tempImage.onload = function () { list_sizes[fallen_leaves.imageIndex] = [this.width, this.height]; }
         tempImage.src = curImage;
         
-        thumblr.reloadTitle();
+        fallen_leaves.reloadTitle();
     },
     
     addImage: function() {
-        if (thumblr.imageIndex >= list_images.length) {
-            clearTimeout (thumblr.interval);
-            thumblr.fetchData();
+        if (fallen_leaves.imageIndex >= list_images.length) {
+            clearTimeout (fallen_leaves.interval);
+            fallen_leaves.fetchData();
             return -1;
         }
         
-        var curImage = list_images[thumblr.imageIndex];
-        var curWidth = list_sizes[thumblr.imageIndex][0];
-        var curHeight = list_sizes[thumblr.imageIndex][1];
+        var curImage = list_images[fallen_leaves.imageIndex];
+        var curWidth = list_sizes[fallen_leaves.imageIndex][0];
+        var curHeight = list_sizes[fallen_leaves.imageIndex][1];
         
         curHeight = (curHeight / curWidth) * 500 * .75;
         curWidth = 500 * .75;
@@ -95,17 +96,17 @@ var thumblr = {
         
         $(photo).css('left', (Math.random() * window.innerWidth) - (curWidth / 2));
         $(photo).css('top', (Math.random() * window.innerHeight) - (curHeight / 2));
-        $(photo).css('zIndex', thumblr.maxZIndex);
+        $(photo).css('zIndex', fallen_leaves.maxZIndex);
         $(photo).toggleClass("appear");
         
         $(photo).mousedown(function () {
-            $(this).css('zIndex', ++thumblr.maxZIndex);
+            $(this).css('zIndex', ++fallen_leaves.maxZIndex);
         });
         
         $('#stage').append(photo);
         $(photo).draggable();
         
-        thumblr.imageIndex++;
-        thumblr.preloadImage();
+        fallen_leaves.imageIndex++;
+        fallen_leaves.preloadImage();
     }
 };
