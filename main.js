@@ -4,10 +4,27 @@ const dialog = electron.dialog
 
 var win;
 
+// Command line
+if (process.argv.length > 1) {
+    let app_filename = process.argv[0];
+    if (process.argv.findIndex(element => (element == '-h' || element == '--help')) != -1) {
+        console.log('Fallen leaves is a simple slideshow viewer, the photos shows as falling leaves in the autumn.');
+        console.log(`${app_filename} <directory_images> <options>`);
+        console.log('');
+        console.log('Options:');
+        console.log('   -d | --delay <number> : seconds delay between showing images');
+        console.log('   -m | --max <number> : max photos in stage');
+        console.log('   -s | --sort (alphabetic|date|size) : sort images');
+        console.log('   -r | --reverse : flag to sort reverse images');
+        console.log('   -z | --random : flag to sort random images');
+        app.exit(0);
+    }
+}
+
+global.argv = process.argv;
+
 function createWindow () {
     win = new BrowserWindow({
-        width: 800,
-        height: 600,
         webPreferences: {
             nodeIntegration: true
         }

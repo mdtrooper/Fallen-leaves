@@ -3,6 +3,9 @@ const fs = require('fs');
 const mime = require('mime-types');
 const Store = require('electron-store');
 
+var remote = require('electron').remote,
+      argv = remote.getGlobal('argv');
+
 const store = new Store();
 
 var list_sizes = [];
