@@ -5,8 +5,12 @@ const dialog = electron.dialog
 var win;
 
 // Command line
+global.command_line = null;
+
+let command_line = {};
 if (process.argv.length > 1) {
     let app_filename = process.argv[0];
+    process.argv.splice(0, 1);
     if (process.argv.findIndex(element => (element == '-h' || element == '--help')) != -1) {
         console.log('Fallen leaves is a simple slideshow viewer, the photos shows as falling leaves in the autumn.');
         console.log(`${app_filename} <directory_images> <options>`);
@@ -19,9 +23,42 @@ if (process.argv.length > 1) {
         console.log('   -z | --random : flag to sort random images');
         app.exit(0);
     }
+    let index_delay = process.argv.findIndex(element => (element == '-d' || element == '--delay'));
+    if (index_delay != -1) {
+        command_line['delay'] = process.argv[index_delay + 1];
+        process.argv.splice(index_delay, 1);
+        process.argv.splice(index_delay + 1, 1);
+    }
+    let index_max = process.argv.findIndex(element => (element == '-m' || element == '--max'));
+    if (index_max != -1) {
+        command_line['max_photos'] = process.argv[index_max + 1];
+        process.argv.splice(index_max, 1);
+        process.argv.splice(index_max + 1, 1);
+    }
+    
+    let index_sort = process.argv.findIndex(element => (element == '-s' || element == '--sort'));
+    if (index_sort != -1) {
+        command_line['sort'] = process.argv[index_sort + 1];
+        process.argv.splice(index_sort, 1);
+        process.argv.splice(index_sort + 1, 1);
+    }
+    
+    let index_reverse = process.argv.findIndex(element => (element == '-r' || element == '--reverse'));
+    if (index_reverse != -1) {
+        command_line['reverse'] = true;
+        process.argv.splice(index_reverse, 1);
+    }
+    
+    let index_random = process.argv.findIndex(element => (element == '-z' || element == '--random'));
+    if (index_random != -1) {
+        command_line['random'] = true;
+        process.argv.splice(index_random, 1);
+    }
+    if (process.argv.length > 1) {
+        command_line['directory_images'] = process.argv[0];
+    }
 }
-
-global.argv = process.argv;
+global.command_line = command_line;
 
 function createWindow () {
     win = new BrowserWindow({

@@ -1,12 +1,6 @@
 const { ipcRenderer } = require('electron');
 const fs = require('fs');
 const mime = require('mime-types');
-const Store = require('electron-store');
-
-var remote = require('electron').remote,
-      argv = remote.getGlobal('argv');
-
-const store = new Store();
 
 var list_sizes = [];
 var list_images = [];
@@ -24,49 +18,8 @@ function shuffle(array) {
 }
 
 ipcRenderer.on('open_directory', (event, arg) => {
-    list_images = [];
-    list_images = [];
     let path = arg[0];
-    fs.readdir(path, (err, dir) => {
-        for (let file of dir) {
-            let filepath = `${arg[0]}/${file}`;
-            let mimetype = mime.lookup(filepath);
-            if (mimetype === false) continue;
-            if (mimetype.split('/')[0] == 'image') {
-                list_images.push(filepath);
-            }
-        }
-        
-        if (store.get('random', RANDOM)) {
-            list_images = shuffle(list_images);
-        }
-        else {
-            // Sort
-            list_images.sort(function(a, b) {
-                switch (store.get('sort', SORT)) {
-                    case 'alphabetic':
-                        let name_a = a.split('/').pop().split('.')[0]
-                        let name_b = b.split('/').pop().split('.')[0]
-                        return name_a.localeCompare(name_b);
-                        break;
-                    case 'date':
-                        return fs.statSync(a).mtime.getTime() - 
-                            fs.statSync(b).mtime.getTime();
-                        break;
-                    case 'size':
-                        return fs.statSync(a).size - fs.statSync(b).size;
-                        break;
-                }
-            });
-            if (store.get('reverse', REVERSE)) {
-                list_images = list_images.reverse();
-            }
-        }
-        
-        fallen_leaves.path = path;
-        
-        fallen_leaves.fetchData();
-    });
+    fallen_leaves.loadDirectory(path);
 });
 
 var fallen_leaves = {
@@ -76,7 +29,55 @@ var fallen_leaves = {
     path: null,
     
     init: function () {
+        if ('directory_images' in command_line) {
+            fallen_leaves.loadDirectory(command_line['directory_images']);
+        }
+    },
+    
+    loadDirectory: function(path) {
+        list_images = [];
+        list_images = [];
         
+        fs.readdir(path, (err, dir) => {
+            for (let file of dir) {
+                let filepath = `${path}/${file}`;
+                let mimetype = mime.lookup(filepath);
+                if (mimetype === false) continue;
+                if (mimetype.split('/')[0] == 'image') {
+                    list_images.push(filepath);
+                }
+            }
+            
+            if (get_config('random')) {
+                list_images = shuffle(list_images);
+            }
+            else {
+                // Sort
+                list_images.sort(function(a, b) {
+                    switch (get_config('sort')) {
+                        case 'alphabetic':
+                            let name_a = a.split('/').pop().split('.')[0]
+                            let name_b = b.split('/').pop().split('.')[0]
+                            return name_a.localeCompare(name_b);
+                            break;
+                        case 'date':
+                            return fs.statSync(a).mtime.getTime() - 
+                                fs.statSync(b).mtime.getTime();
+                            break;
+                        case 'size':
+                            return fs.statSync(a).size - fs.statSync(b).size;
+                            break;
+                    }
+                });
+                if (get_config('reverse')) {
+                    list_images = list_images.reverse();
+                }
+            }
+            
+            fallen_leaves.path = path;
+            
+            fallen_leaves.fetchData();
+        });
     },
     
     reloadTitle: function() {
@@ -95,8 +96,8 @@ var fallen_leaves = {
         
         fallen_leaves.preloadImage();
         
-        clearTimeout (fallen_leaves.interval);
-        fallen_leaves.interval = setInterval ( "fallen_leaves.addImage()", 4000 );
+        clearTimeout(fallen_leaves.interval);
+        fallen_leaves.interval = setInterval ( "fallen_leaves.addImage()", 1000 * get_config('delay'));
     },
     
     preloadImage: function() {
