@@ -1,16 +1,10 @@
-const Store = require('electron-store');
-
-const store = new Store();
-
 var preferences = {
-    a: 1,
-    
     init: function () {
-        $("#seconds").val(store.get('seconds', SECONDS_DEFAULT));
-        $("#max_photos").val(store.get('max_photos', MAX_PHOTOS));
-        $("#sort").val(store.get('sort', store.get('sort', SORT)));
-        $("#random").prop('checked', store.get('random', RANDOM));
-        $("#reverse").prop('checked', store.get('reverse', REVERSE));
+        $("#delay").val(get_config('delay'));
+        $("#max_photos").val(get_config('max_photos'));
+        $("#sort").val(get_config('sort'));
+        $("#random").prop('checked', get_config('random'));
+        $("#reverse").prop('checked', get_config('reverse'));
         
         $("#seconds").on('change', function() {
             store.set('seconds', $(this).val());
