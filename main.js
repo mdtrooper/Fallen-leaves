@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, NativeImage } = require('electron');
 const electron = require('electron')
 const dialog = electron.dialog
 
@@ -118,33 +118,16 @@ function preferencesWindow() {
 
 function aboutWindow() {
     child = new BrowserWindow({
-        width: 300,
-        height: 100,
+        width: 450,
+        height: 200,
         parent: win,
         modal: true,
         show: false,
         title: "About Slideshow"});
     child.setMenuBarVisibility(false);
     
-    content = `
-        <html>
-            <head></head>
-            <body>
-                <p>
-                    <b>Fallen leaves</b><br/>
-                    <b>GPL 2019</b><br/>
-                    Original Proyect: <a target="_blank" href="javascript: openBrowser('https://github.com/scottgarner/Thumblr');">Scott Garner</a>
-                </p>
-            </body>
-            <script type="text/javascript">
-                function openBrowser(link) {
-                    require("electron").shell.openExternal(link);
-                }
-            </script>
-        </html>`;
-    
-    let file = 'data:text/html,' + encodeURIComponent(content);
-    child.loadURL(file);
+    //~ child.webContents.openDevTools();
+    child.loadFile('about.html');
     child.show();
 }
 

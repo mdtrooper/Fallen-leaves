@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Fallen-leaves</title>
+        <style type="text/css">
+            body {
+                background-image: url('images/icon.svg'); background-size: cover; background-color: #EEEDC3;
+            }
+            h4, p {
+                text-shadow: -1px 0 #EEEDC3, 0 1px #EEEDC3, 1px 0 #EEEDC3, 0 -1px #EEEDC3;
+            }
+            
+            h4 {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h4>
+            <a target="_blank" href="javascript: openBrowser('https://github.com/mdtrooper/Fallen-leaves')">Fallen leaves</a>
+        </h4>
+        <p>
+            <b>Version:</b> 1.0 (2019-06)<br/>
+            <b>License:</b> GPL<br/>
+            <b>Authors:</b> Miguel de Dios, Scott Garner (original project)
+        </p>
+        <p>
+            <b>Original Proyect:</b> <a target="_blank" href="javascript: openBrowser('https://github.com/scottgarner/Thumblr');">Thumblr</a>
+        </p>
+    </body>
+    <script type="text/javascript">
+        function openBrowser(link) {
+            require("electron").shell.openExternal(link);
+        }
+    </script>
+</html>
