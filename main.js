@@ -1,6 +1,8 @@
-const { app, BrowserWindow, Menu, ipcMain, NativeImage } = require('electron');
-const electron = require('electron')
-const dialog = electron.dialog
+const { app, BrowserWindow, Menu, ipcMain, nativeImage } = require('electron');
+const electron = require('electron');
+const dialog = electron.dialog;
+
+var icon = nativeImage.createFromPath('./images/icon.png')
 
 var win;
 
@@ -62,6 +64,7 @@ global.command_line = command_line;
 
 function createWindow () {
     win = new BrowserWindow({
+        icon: icon,
         webPreferences: {
             nodeIntegration: true
         }
