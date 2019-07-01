@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "48x48": "images/icon.48.png",
+    "64x64": "images/icon.64.png",
+    "128x128": "images/icon.128.png",
+    "256x256": "images/icon.256.png",
+    "scalable": "images/icon.svg"
+  },
+  "categories": ["Graphics"]
+}

@@ -2,8 +2,7 @@ const { app, BrowserWindow, Menu, ipcMain, nativeImage } = require('electron');
 const electron = require('electron');
 const dialog = electron.dialog;
 
-var icon = nativeImage.createFromPath('./images/icon.png')
-
+var icon = nativeImage.createFromPath('./images/icon.png');
 var win;
 
 // Command line
