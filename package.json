@@ -6,15 +6,20 @@
   "scripts": {
     "build": "rm ./dist -rf && electron-packager . fallen-leaves --icon=./images/icon.png --platform linux --arch x64 --out dist/ --overwrite",
     "deb64": "npm run build && cp images/icon* ./dist/fallen-leaves-linux-x64/resources && electron-installer-debian --src dist/fallen-leaves-linux-x64/ --dest dist/installers/ --arch amd64 --config deb.package.conf.json",
+    "snap": "electron-builder --linux snap",
     "start": "electron .",
     "cp_js_libraries": "cp node_modules/bootstrap/dist/css/* ./css/ && cp node_modules/bootstrap/dist/js/* ./js/ && cp node_modules/jquery/dist/jquery.min.js ./js/ && cp node_modules/jquery-ui-dist/*.js ./js/ && cp node_modules/jquery-ui-dist/*.css ./css/ && cp node_modules/jquery-ui-dist/images ./css/ -r"
   },
-  "keywords": ["slideshow", "viewer"],
+  "keywords": [
+    "slideshow",
+    "viewer"
+  ],
   "homepage": "https://github.com/mdtrooper/Fallen-leaves",
   "author": "Miguel de Dios Matias <tres.14159@gmail.com>",
   "license": "GPL",
   "devDependencies": {
     "electron": "^4.0.1",
+    "electron-builder": "^21.0.15",
     "electron-installer-debian": "^2.0.0",
     "electron-packager": "^14.0.0"
   },
@@ -25,5 +30,11 @@
     "jquery": "^3.4.1",
     "jquery-ui-dist": "^1.12.1",
     "mime-types": "^2.1.24"
+  },
+  "build": {
+      "linux": {
+          "category": "Graphics",
+          "icon": "images/icon.svg"
+      }
   }
 }
