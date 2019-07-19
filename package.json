@@ -32,9 +32,9 @@
     "mime-types": "^2.1.24"
   },
   "build": {
-      "linux": {
-          "category": "Graphics",
-          "icon": "images/icon.svg"
-      }
+    "linux": {
+      "category": "Graphics",
+      "icon": "images/icon.svg"
+    }
   }
 }
