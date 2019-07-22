@@ -69,34 +69,51 @@
 								<header class="major">
 									<h2>Usage</h2>
 								</header>
-								<ul class="features">
-                                    <li>
-										<span class="icon solid major style5 fa-cogs"></span>
-										<h3>Config</h3>
-										<p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <span class="icon solid major style5 fa-cogs"></span>
+                                        <h3>Config</h3>
+                                        <p class="align-left">
                                             Fallen leaves has a few setup options. They are the typical options of slideshow:
-                                            <ul>
-                                                <li>aaa</li>
-                                                <li>bbb</li>
+                                            <ul class="align-left">
+                                                <li><b>Delay between photos:</b> in seconds (by default 4 seconds)</li>
+                                                <li><b>Sort images:</b> Date, Name, Size (and reverse) (by default Name)</li>
+                                                <li>Or show the images random in <b>random</b> order</li>
                                             </ul>
                                         </p>
-									</li>
-									<li>
-										<span class="icon solid major style1 fa-terminal"></span>
-										<h3>Ipsum consequat</h3>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
-									</li>
-									<li>
-										<span class="icon solid major style3 fa-mouse-pointer"></span>
-										<h3>Amed sed feugiat</h3>
-										<p>Sed lorem amet ipsum dolor et amet nullam consequat a feugiat consequat tempus veroeros sed consequat.</p>
-									</li>
-								</ul>
-								<footer class="major">
-									<ul class="actions special">
-										<li><a href="generic.html" class="button">Learn More</a></li>
-									</ul>
-								</footer>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="icon solid major style1 fa-terminal"></span>
+                                        <h3>Command line</h3>
+                                        <p class="align-left">
+                                            Who does not love the terminal? ...well the windows users and mac users... But I love the terminal and Fallen leaves has command line options:
+                                           <pre><code>
+$ fallen-leaves -h
+Fallen leaves is a simple slideshow viewer, the photos shows as falling leaves in the autumn.
+/usr/lib/fallen-leaves/fallen-leaves &lt;directory_images&gt; &lt;options&gt;
+
+Options:
+   -d | --delay &lt;number&gt; : seconds delay between showing images
+   -m | --max &lt;number&gt; : max photos in stage
+   -s | --sort (alphabetic|date|size) : sort images
+   -r | --reverse : flag to sort reverse images
+   -z | --random : flag to sort random images</code></pre>
+                                        </p>
+                                    </div>
+                                    <div class="col-4">
+                                        <span class="icon solid major style3 fa-mouse-pointer"></span>
+                                        <h3>Usage</h3>
+                                        <p class="align-left">It extremely easy to use. Only you open image directory in topmenu entry File -&gt; Open Dir (or shotcut Ctrl+O) and Fallen leaves starts showing the images.</p>
+                                    </div>
+                                </div>
+                                <div class="row aln-center">
+                                    <div class="col-8">
+                                        <span class="image fit"><a class="thumbnail" href="images/dogs00.jpg"><img src="images/dogs00.jpg" alt=""></a></span>
+                                        <p>
+                                            The dogs of screenshot are from <a href="https://commons.wikimedia.org/wiki/Category:Famous_dogs">Category:Famous dogs (Wikicommons)</a> 
+                                        </p>
+                                    </div>
+                                </div>
 							</section>
 
 						<!-- Contribute Section -->
