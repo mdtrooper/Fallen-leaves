@@ -112,43 +112,42 @@
 							});
 
 					});
-            
-            // Gallery - popunder
-            $('.thumbnail').viewbox();
-
-
+			
 		}
-    
-    // GitHub stats from API v3
-    $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/contributors', function(data) {
-        let amount_contributors = data.length;
-        
-        let amount_commits = 0;
-        for (contributor of data) {
-            amount_commits += contributor.contributions
-        }
-        $("#developers").html(amount_contributors);
-        $("#commits").html(amount_commits);
-    });
-    
-    $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/tags', function(data) {
-        let amount_releases = data.length;
-        $("#releases").html(amount_releases);
-    });
-    
-    $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/issues?state=open', function(data) {
-        let amount_open_issues = data.length;
-        
-        $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/issues?state=all', function(data) {
-            let amount_all_issues = data.length;
-            $("#issues").html(amount_open_issues + " / " + amount_all_issues);
-        });
-    });
-    
-    $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/branches', function(data) {
-        let amount_branches = data.length;
-        $("#branches").html(amount_branches);
-    });
+	
+	// Gallery - popunder
+	$('.thumbnail').viewbox();
+	
+	// GitHub stats from API v3
+	$.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/contributors', function(data) {
+		let amount_contributors = data.length;
+		
+		let amount_commits = 0;
+		for (contributor of data) {
+			amount_commits += contributor.contributions
+		}
+		$("#developers").html(amount_contributors);
+		$("#commits").html(amount_commits);
+	});
+	
+	$.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/tags', function(data) {
+		let amount_releases = data.length;
+		$("#releases").html(amount_releases);
+	});
+	
+	$.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/issues?state=open', function(data) {
+		let amount_open_issues = data.length;
+		
+		$.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/issues?state=all', function(data) {
+			let amount_all_issues = data.length;
+			$("#issues").html(amount_open_issues + " / " + amount_all_issues);
+		});
+	});
+	
+	$.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/branches', function(data) {
+		let amount_branches = data.length;
+		$("#branches").html(amount_branches);
+	});
 
 	// Scrolly.
 		$('.scrolly').scrolly({
