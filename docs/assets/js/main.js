@@ -118,6 +118,37 @@
 
 
 		}
+    
+    // GitHub stats from API v3
+    $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/contributors', function(data) {
+        let amount_contributors = data.length;
+        
+        let amount_commits = 0;
+        for (contributor of data) {
+            amount_commits += contributor.contributions
+        }
+        $("#developers").html(amount_contributors);
+        $("#commits").html(amount_contributors);
+    });
+    
+    $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/tags', function(data) {
+        let amount_releases = data.lenght;
+        $("#releases").html(amount_contributors);
+    });
+    
+    $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/issues?state=open', function(data) {
+        let amount_open_issues = data.lenght;
+        
+        $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/issues?state=all', function(data) {
+            let amount_all_issues = data.lenght;
+            $("#issues").html(amount_open_issues + " / " + amount_all_issues);
+        });
+    });
+    
+    $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/branches', function(data) {
+        let amount_releases = data.branches;
+        $("#branches").html(amount_releases);
+    });
 
 	// Scrolly.
 		$('.scrolly').scrolly({
