@@ -146,7 +146,7 @@
     });
     
     $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/branches', function(data) {
-        let amount_releases = data.branches;
+        let amount_releases = data.length;
         $("#branches").html(amount_releases);
     });
 
