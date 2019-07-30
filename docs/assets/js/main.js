@@ -128,12 +128,12 @@
             amount_commits += contributor.contributions
         }
         $("#developers").html(amount_contributors);
-        $("#commits").html(amount_contributors);
+        $("#commits").html(amount_commits);
     });
     
     $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/tags', function(data) {
         let amount_releases = data.lenght;
-        $("#releases").html(amount_contributors);
+        $("#releases").html(amount_releases);
     });
     
     $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/issues?state=open', function(data) {
