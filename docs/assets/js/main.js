@@ -113,7 +113,7 @@
 
 					});
             
-            
+            // Gallery - popunder
             $('.thumbnail').viewbox();
 
 
@@ -132,22 +132,22 @@
     });
     
     $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/tags', function(data) {
-        let amount_releases = data.lenght;
+        let amount_releases = data.length;
         $("#releases").html(amount_releases);
     });
     
     $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/issues?state=open', function(data) {
-        let amount_open_issues = data.lenght;
+        let amount_open_issues = data.length;
         
         $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/issues?state=all', function(data) {
-            let amount_all_issues = data.lenght;
+            let amount_all_issues = data.length;
             $("#issues").html(amount_open_issues + " / " + amount_all_issues);
         });
     });
     
     $.getJSON('https://api.github.com/repos/mdtrooper/Fallen-leaves/branches', function(data) {
-        let amount_releases = data.length;
-        $("#branches").html(amount_releases);
+        let amount_branches = data.length;
+        $("#branches").html(amount_branches);
     });
 
 	// Scrolly.
