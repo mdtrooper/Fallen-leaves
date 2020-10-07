@@ -6,8 +6,8 @@ var preferences = {
         $("#random").prop('checked', get_config('random'));
         $("#reverse").prop('checked', get_config('reverse'));
         
-        $("#seconds").on('change', function() {
-            store.set('seconds', $(this).val());
+        $("#delay").on('change', function() {
+            store.set('delay', $(this).val());
         });
         $("#max_photos").on('change', function() {
             store.set('max_photos', $(this).val());

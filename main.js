@@ -102,6 +102,7 @@ function createWindow () {
     ])
     Menu.setApplicationMenu(menu);
     if (global.command_line['debug']) {
+        console.log(app.getPath('userData'));
         win.webContents.openDevTools();
     }
     win.loadFile('index.html');
