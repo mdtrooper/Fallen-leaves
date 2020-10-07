@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu, ipcMain, nativeImage } = require('electron');
 const electron = require('electron');
 const dialog = electron.dialog;
 
+// BUG: it takes all time the local icon instead from the system (deb)
 var icon = nativeImage.createFromPath('./images/icon.png');
 var win;
 
@@ -22,6 +23,7 @@ if (process.argv.length > 1) {
         console.log('   -s | --sort (alphabetic|date|size) : sort images');
         console.log('   -r | --reverse : flag to sort reverse images');
         console.log('   -z | --random : flag to sort random images');
+        console.log('   -b | --debug : enable debug mode (only devs)');
         app.exit(0);
     }
     let index_delay = process.argv.findIndex(element => (element == '-d' || element == '--delay'));
@@ -55,6 +57,13 @@ if (process.argv.length > 1) {
         command_line['random'] = true;
         process.argv.splice(index_random, 1);
     }
+    
+    let indexdebug = process.argv.findIndex(element => (element == '-b' || element == '--debug'));
+    if (indexdebug != -1) {
+        command_line['debug'] = true;
+        process.argv.splice(indexdebug, 1);
+    }
+    
     if (process.argv.length > 1) {
         command_line['directory_images'] = process.argv[0];
     }
@@ -92,8 +101,9 @@ function createWindow () {
         }
     ])
     Menu.setApplicationMenu(menu);
-
-    //~ win.webContents.openDevTools();
+    if (global.command_line['debug']) {
+        win.webContents.openDevTools();
+    }
     win.loadFile('index.html');
 }
 
@@ -113,7 +123,9 @@ function preferencesWindow() {
         title: "Preferences"});
     child.setMenuBarVisibility(false);
     
-    //~ child.webContents.openDevTools();
+    if (global.command_line['debug']) {
+        child.webContents.openDevTools();
+    }
     child.loadFile('preferences.html');
     child.show();
 }
@@ -127,8 +139,9 @@ function aboutWindow() {
         show: false,
         title: "About Slideshow"});
     child.setMenuBarVisibility(false);
-    
-    //~ child.webContents.openDevTools();
+    if (global.command_line['debug']) {
+        child.webContents.openDevTools();
+    }
     child.loadFile('about.html');
     child.show();
 }
