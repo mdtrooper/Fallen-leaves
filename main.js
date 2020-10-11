@@ -119,7 +119,8 @@ function preferencesWindow() {
         width: 600,
         height: 300,
         parent: win,
-        modal: true,
+        alwaysOnTop: true,
+        resizable: false,
         show: false,
         title: "Preferences"});
     child.setMenuBarVisibility(false);
@@ -136,7 +137,8 @@ function aboutWindow() {
         width: 450,
         height: 200,
         parent: win,
-        modal: true,
+        resizable: false,
+        alwaysOnTop: true,
         show: false,
         title: "About Slideshow"});
     child.setMenuBarVisibility(false);
