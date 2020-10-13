@@ -7,7 +7,7 @@
     "build": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && rm ./dist -rf && electron-packager . fallen-leaves --icon=./images/icon.png --platform linux --arch x64 --out dist/ --overwrite",
     "deb64": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && npm run build && cp images/icon* ./dist/fallen-leaves-linux-x64/resources && electron-installer-debian --src dist/fallen-leaves-linux-x64/ --dest dist/installers/ --arch amd64 --config deb.package.conf.json",
     "snap": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && electron-builder --linux snap",
-    "start": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && electron .",
+    "start": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && electron main.js",
     "cp_css_bootstrap": "cp node_modules/bootstrap/dist/css/* ./css/",
     "cp_files_jqueryui": "cp node_modules/jquery-ui-dist/*.js ./js/ && cp node_modules/jquery-ui-dist/*.css ./css/ && cp node_modules/jquery-ui-dist/images ./css/ -r"
   },

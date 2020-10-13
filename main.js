@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const { app, BrowserWindow, Menu, ipcMain, nativeImage } = require('electron');
 const electron = require('electron');
@@ -15,6 +16,9 @@ let command_line = {};
 if (process.argv.length > 1) {
     let app_filename = process.argv[0];
     process.argv.splice(0, 1);
+    if (process.argv.indexOf('main.js') !== -1) {
+        process.argv.splice(0, 1); // When it launch as npm start
+    }
     if (process.argv.findIndex(element => (element == '-h' || element == '--help')) != -1) {
         console.log('Fallen leaves is a simple slideshow viewer, the photos shows as falling leaves in the autumn.');
         console.log(`${app_filename} <directory_images> <options>`);
@@ -66,8 +70,16 @@ if (process.argv.length > 1) {
         process.argv.splice(indexdebug, 1);
     }
     
-    if (process.argv.length > 1) {
-        command_line['directory_images'] = process.argv[0];
+    while (process.argv.length > 0) {
+        try {
+            var path_dir = process.argv[0];
+            process.argv.splice(0, 1);
+            var fullpath_dir = fs.realpathSync(process.argv[0]);
+            command_line['directory_images'] = fullpath_dir;
+        }
+        catch (error) {
+            // Do none
+        }
     }
 }
 global.command_line = command_line;
@@ -78,7 +90,10 @@ function createWindow () {
         webPreferences: {
             nodeIntegration: true
         }
-    })
+    });
+    if (global.command_line['debug']) {
+        global.win = win;
+    }
     
     var menu = Menu.buildFromTemplate([
         {
@@ -104,7 +119,6 @@ function createWindow () {
     ])
     Menu.setApplicationMenu(menu);
     if (global.command_line['debug']) {
-        console.log(app.getPath('userData'));
         win.webContents.openDevTools();
     }
     win.loadFile('index.html');
