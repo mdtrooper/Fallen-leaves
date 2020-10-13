@@ -1,9 +1,11 @@
+const path = require('path');
 const { app, BrowserWindow, Menu, ipcMain, nativeImage } = require('electron');
 const electron = require('electron');
 const dialog = electron.dialog;
 
 // BUG: it takes all time the local icon instead from the system (deb)
-var icon = nativeImage.createFromPath('./images/icon.png');
+var icon_path = path.join(app.getAppPath(), './images/icon.png');
+var icon = nativeImage.createFromPath(icon_path);
 var win;
 
 // Command line
@@ -150,3 +152,7 @@ function aboutWindow() {
 }
 
 app.on('ready', createWindow);
+
+app.on('window-all-closed', function() {
+    app.quit();
+});
