@@ -9,7 +9,7 @@
     "build": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && rm ./dist -rf && electron-packager . fallen-leaves --icon=./images/icon.png --platform linux --arch x64 --out dist/ --overwrite",
     "deb64": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && npm run build && cp images/icon* ./dist/fallen-leaves-linux-x64/resources && electron-installer-debian --src dist/fallen-leaves-linux-x64/ --dest dist/installers/ --arch amd64 --config deb.package.conf.json",
     "snap": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && electron-builder --linux snap",
-    "start": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && electron main.js",
+    "start": "npm run cp_css_bootstrap && npm run cp_files_jqueryui && electron --no-sandbox main.js",
     "cp_css_bootstrap": "cp node_modules/bootstrap/dist/css/* ./css/",
     "cp_files_jqueryui": "cp node_modules/jquery-ui-dist/*.js ./js/ && cp node_modules/jquery-ui-dist/*.css ./css/ && cp node_modules/jquery-ui-dist/images ./css/ -r"
   },
@@ -26,16 +26,16 @@
     "url": "https://github.com/mdtrooper/Fallen-leaves/issues"
   },
   "devDependencies": {
-    "electron": "^4.2.12",
-    "electron-builder": "^21.2.0",
-    "electron-installer-debian": "^2.0.1",
+    "electron": "^10.1.5",
+    "electron-builder": "^22.9.1",
+    "electron-installer-debian": "^3.1.0",
     "electron-packager": "^15.1.0"
   },
   "dependencies": {
-    "bootstrap": "^4.5.2",
+    "bootstrap": "^4.5.3",
     "popper.js": "^1.16.1",
     "electron-context-menu": "^0.12.1",
-    "electron-store": "^3.3.0",
+    "electron-store": "^6.0.1",
     "jquery": "^3.5.1",
     "jquery-ui-dist": "^1.12.1",
     "mime-types": "^2.1.27"

@@ -88,7 +88,8 @@ function createWindow () {
     win = new BrowserWindow({
         icon: icon,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            enableRemoteModule: true
         }
     });
     if (global.command_line['debug']) {
@@ -125,9 +126,13 @@ function createWindow () {
 }
 
 function dialogDirectory() {
-    dialog.showOpenDialog(win, {
-        properties: ['openDirectory']},
-        (filePaths) => { win.webContents.send('open_directory', filePaths); });
+    dialog.showOpenDialog(win, {properties: ['openDirectory']})
+        .then(result => {
+            if (!result.canceled) {
+                win.webContents.send('open_directory', result.filePaths);
+            }
+        })
+        .catch(err => {console.log(err)});
 }
 
 function preferencesWindow() {
@@ -138,7 +143,11 @@ function preferencesWindow() {
         alwaysOnTop: true,
         resizable: false,
         show: false,
-        title: "Preferences"});
+        title: "Preferences",
+        webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true
+        }});
     child.setMenuBarVisibility(false);
     
     if (global.command_line['debug']) {
@@ -156,7 +165,11 @@ function aboutWindow() {
         resizable: false,
         alwaysOnTop: true,
         show: false,
-        title: "About Slideshow"});
+        title: "About Slideshow",
+        webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true
+        }});
     child.setMenuBarVisibility(false);
     if (global.command_line['debug']) {
         child.webContents.openDevTools();
