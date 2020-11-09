@@ -84,6 +84,11 @@ if (process.argv.length > 1) {
 }
 global.command_line = command_line;
 
+function toggleFullScreen() {
+    win.setFullScreen(!win.isFullScreen());
+}
+ipcMain.on('toggleFullScreen', (event, arg) => {toggleFullScreen();})
+
 function createWindow () {
     win = new BrowserWindow({
         icon: icon,
@@ -112,6 +117,13 @@ function createWindow () {
             ]
         },
         {
+            label: 'View',
+            submenu: [
+                {label: 'Toggle FullScreen', click() {toggleFullScreen()}, accelerator: 'F11'}
+            ]
+        },
+        
+        {
             label: 'Help',
             submenu: [
                 {label: 'About', click() {aboutWindow();}, accelerator: 'CmdOrCtrl+Shift+A' }
@@ -119,6 +131,7 @@ function createWindow () {
         }
     ])
     Menu.setApplicationMenu(menu);
+    
     if (global.command_line['debug']) {
         win.webContents.openDevTools();
     }

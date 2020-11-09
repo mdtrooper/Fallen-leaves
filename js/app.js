@@ -1,6 +1,11 @@
 const { ipcRenderer } = require('electron');
+const { Menu } = remote;
 const fs = require('fs');
 const mime = require('mime-types');
+
+var context_menu = Menu.buildFromTemplate([
+  { label: 'Toggle FullScreen', click() {ipcRenderer.send('toggleFullScreen', null);}, accelerator: 'F11'}
+]);
 
 var list_sizes = [];
 var list_images = [];
@@ -32,6 +37,11 @@ var fallen_leaves = {
         if ('directory_images' in command_line) {
             fallen_leaves.loadDirectory(command_line['directory_images']);
         }
+        
+        $("body").on('contextmenu', (event, params) => {
+          event.preventDefault();
+          context_menu.popup();
+        });
     },
     
     loadDirectory: function(path) {
