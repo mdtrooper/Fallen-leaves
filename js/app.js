@@ -4,7 +4,8 @@ const fs = require('fs');
 const mime = require('mime-types');
 
 var context_menu = Menu.buildFromTemplate([
-  { label: 'Toggle FullScreen', click() {ipcRenderer.send('toggleFullScreen', null);}, accelerator: 'F11'}
+  {label: 'Toggle FullScreen', click() {ipcRenderer.send('toggleFullScreen', null);}, accelerator: 'F11'},
+  {label: 'Reset', click() {fallen_leaves.reset();}, accelerator: 'CmdOrCtrl+R'}
 ]);
 
 var list_sizes = [];
@@ -26,6 +27,11 @@ ipcRenderer.on('open_directory', (event, arg) => {
     let path = arg[0];
     fallen_leaves.loadDirectory(path);
 });
+
+ipcRenderer.on('reset', (event, arg) => {
+    fallen_leaves.reset();
+});
+
 
 var fallen_leaves = {
     imageIndex: 0,
@@ -123,10 +129,14 @@ var fallen_leaves = {
         fallen_leaves.reloadTitle();
     },
     
+    reset: function() {
+        clearTimeout (fallen_leaves.interval);
+        fallen_leaves.fetchData();
+    },
+    
     addImage: function() {
         if (fallen_leaves.imageIndex >= list_images.length) {
-            clearTimeout (fallen_leaves.interval);
-            fallen_leaves.fetchData();
+            fallen_leaves.reset();
             return -1;
         }
         

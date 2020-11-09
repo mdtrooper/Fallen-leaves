@@ -119,7 +119,8 @@ function createWindow () {
         {
             label: 'View',
             submenu: [
-                {label: 'Toggle FullScreen', click() {toggleFullScreen()}, accelerator: 'F11'}
+                {label: 'Toggle FullScreen', click() {toggleFullScreen();}, accelerator: 'F11'},
+                {label: 'Reset', click() {win.webContents.send('reset');}, accelerator: 'CmdOrCtrl+R'}
             ]
         },
         
