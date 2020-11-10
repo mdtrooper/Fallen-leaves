@@ -43,7 +43,7 @@
   "build": {
     "linux": {
       "category": "Graphics",
-      "icon": "images/icon.svg"
+      "icon": "./images/icon.png"
     }
   }
 }
