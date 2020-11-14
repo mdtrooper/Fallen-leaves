@@ -152,7 +152,7 @@ function dialogDirectory() {
 function preferencesWindow() {
     child = new BrowserWindow({
         width: 600,
-        height: 300,
+        height: 350,
         parent: win,
         alwaysOnTop: true,
         resizable: false,

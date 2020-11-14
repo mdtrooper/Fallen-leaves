@@ -8,6 +8,7 @@ var context_menu = Menu.buildFromTemplate([
   {label: 'Reset', click() {fallen_leaves.reset();}, accelerator: 'CmdOrCtrl+R'}
 ]);
 
+var added = [];
 var list_sizes = [];
 var list_images = [];
 
@@ -92,7 +93,7 @@ var fallen_leaves = {
             
             fallen_leaves.path = path;
             
-            fallen_leaves.fetchData();
+            fallen_leaves.start();
         });
     },
     
@@ -100,7 +101,55 @@ var fallen_leaves = {
         $("title").text(`Fallen leaves: ${this.imageIndex}/${list_images.length} '${this.path}'`);
     },
     
-    fetchData: function() {
+    start: function() {
+        // Clean book
+        $("#stage *").remove();
+        
+        switch (get_config('type')) {
+            case 'fallen_leaves':
+                fallen_leaves.startFallen();
+                break;
+            case 'book':
+                fallen_leaves.startBook();
+                break;
+        }
+    },
+    
+    startBook: function() {
+        added = Array(list_images.length).fill(false);
+        
+        $("#stage").append($("<div>").addClass("book"));
+        for (var index in list_images.slice(0, 4)) {
+            $('.book').append($('<div>').addClass('page').css("background-image", "url(" + list_images[index] + ")"));
+            added[index] = true;
+        }
+        
+        $('.book').booklet(
+            {
+                width:  '100%',
+                height: '100%',
+                pageNumbers: true,
+                auto: true,
+                closed: true,
+                autoCenter: true,
+                delay: (1000 * get_config('delay')),
+                change: function(event, data) {
+                    if (list_images[data.index + 2] && !added[data.index + 2]) {
+                        $('.book').booklet('add', 'end',
+                            $('<div>').addClass('page').css("background-image", "url(" + list_images[data.index + 2] + ")"));
+                        added[data.index + 2] = true;
+                    }
+                    if (list_images[data.index + 3] && !added[data.index + 3]) {
+                        $('.book').booklet('add', 'end',
+                            $('<div>').addClass('page').css("background-image", "url(" + list_images[data.index + 3] + ")"));
+                        added[data.index + 3] = true;
+                    }
+                }
+            }
+        );
+    },
+    
+    startFallen: function() {
         $('#stage').fadeOut('slow', function() {
             $('.photo').remove();
             $('#stage').show();
@@ -131,7 +180,7 @@ var fallen_leaves = {
     
     reset: function() {
         clearTimeout (fallen_leaves.interval);
-        fallen_leaves.fetchData();
+        fallen_leaves.start();
     },
     
     addImage: function() {

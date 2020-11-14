@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Fallen leaves</title>
+        <title>Fallen leaves: Preferences</title>
         
         <meta name="description" content="Image Slideshow" />
         <meta name="author" content="Original Scott Garner, Electron version by Miguel de Dios" />
@@ -10,12 +10,22 @@
 -->
         
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-        
+        <style>
+            .container {
+                padding: 20px;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
-            <div class="row">
-                <div class="col-6">Preferences:</div>
+            <div class="form-group row">
+                <label for="type" class="col-6 col-form-label">Type:</label>
+                <div class="col-6">
+                    <select class="form-control" id="type" name="type">
+                        <option value="fallen_leaves">Fallen Leaves</option>
+                        <option value="book">Book</option>
+                    </select>
+                  </div>
             </div>
             <div class="form-group row">
               <label for="delay" class="col-6 col-form-label">Delay in Seconds next photo:</label>
@@ -54,7 +64,6 @@
         </div>
         <script type="text/javascript">let $ = require('jquery');</script>
         <script type="text/javascript">require('bootstrap');</script>
-        
         <script type="text/javascript" src="js/config.js"></script>
         <script type="text/javascript" src="js/preferences.js"></script>
         <script type="text/javascript">

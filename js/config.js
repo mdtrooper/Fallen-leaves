@@ -3,6 +3,7 @@ const Store = require('electron-store');
 
 const store = new Store();
 
+const TYPE = 'fallen_leaves';
 const DELAY = 4;
 const MAX_PHOTOS = 1000; // TO DO: Implement a method to delete old images.
 const SORT = 'alphabetic';
@@ -14,6 +15,9 @@ var command_line = remote.getGlobal('command_line');
 function get_config(config_name, config_value) {
     if (typeof(config_value) == 'undefined') {
         switch (config_name) {
+            case 'type':
+                config_value = TYPE;
+                break;
             case 'delay':
                 config_value = DELAY;
                 break;
